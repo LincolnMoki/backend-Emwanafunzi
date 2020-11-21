@@ -43,3 +43,13 @@ class ListProduct(generics.ListCreateAPIView):
 class DetailProduct(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+class UserView(APIView):
+    permission_classes = (IsAuthenticated,IsCompanyAdmin)
+    def get(self, request):
+        try:
+            users = User.objects.all()
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        if request.method == 'GET':
+            serializer = UserSerializer(users, many=True)
+            return Response(serializer.data)
