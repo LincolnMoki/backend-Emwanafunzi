@@ -15,5 +15,6 @@ urlpatterns = [
     path('categories/<int:pk>/', DetailCategory.as_view(), name='singlecategory'),
 
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 ]
