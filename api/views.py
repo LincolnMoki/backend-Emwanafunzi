@@ -53,3 +53,9 @@ class UserView(APIView):
         if request.method == 'GET':
             serializer = UserSerializer(users, many=True)
             return Response(serializer.data)
+class HelloView(APIView):
+    permission_classes = (IsAuthenticated,)             # <-- And here
+
+    def get(self, request):
+        content = {'message': 'Hello, World!'}
+        return Response(content)
