@@ -31,3 +31,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'email', 'role']
+
+class CategorySerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        fields = (
+            'id',
+            'title'
+        )
+        model = Category 
