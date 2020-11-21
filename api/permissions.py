@@ -12,3 +12,15 @@ class IsCompanyAdmin(BasePermission):
             return True
         else:
             return False
+
+class IsNormalUser(BasePermission):
+    message = 'you must be a user to access this page'
+    
+    def has_permission(self, request, view):
+        """check if object has permission"""
+
+        role = request.user.role
+        if role == 'NU':
+            return True
+        else:
+            return False
