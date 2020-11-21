@@ -15,7 +15,7 @@ class User(AbstractUser):
     role = models.CharField(
         verbose_name='user role', max_length=2, choices=USER_ROLES,default='NU'
     )
-    
+
 class Category(models.Model):
     title = models.CharField(max_length=255)
 
@@ -23,3 +23,18 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
     def __str__(self):
         return self.title
+
+class Product(models.Model):
+    product_tag = models.CharField(max_length=10)
+    name = models.CharField(max_length=120)
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
+    price = models.IntegerField()
+    stock = models.IntegerField()
+    image = CloudinaryField('image')
+    status = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return '{} {}'.format(self.product_tag, self.name)
