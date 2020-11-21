@@ -40,3 +40,17 @@ class CategorySerializer(serializers.ModelSerializer):
             'title'
         )
         model = Category 
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'id',
+            'product_tag',
+            'name',
+            'category',
+            'price',
+            'stock',
+            'image',         
+            'status',
+        )
+        model = Product
