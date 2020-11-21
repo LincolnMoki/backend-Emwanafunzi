@@ -54,3 +54,8 @@ class ProductSerializer(serializers.ModelSerializer):
             'status',
         )
         model = Product
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['id','name', 'profile_picture', 'location']
