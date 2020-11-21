@@ -15,4 +15,11 @@ class User(AbstractUser):
     role = models.CharField(
         verbose_name='user role', max_length=2, choices=USER_ROLES,default='NU'
     )
+    
+class Category(models.Model):
+    title = models.CharField(max_length=255)
 
+    class Meta:
+        verbose_name_plural = 'Categories'
+    def __str__(self):
+        return self.title
