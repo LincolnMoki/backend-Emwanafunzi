@@ -15,3 +15,6 @@ app:
 
 superuser:
 	./manage.py createsuperuser --username $(name)
+
+token:
+	.manage.py drf_create_token --username $(name)	
