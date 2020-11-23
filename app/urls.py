@@ -15,9 +15,33 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from  api import views
+from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
+from django.conf import settings
+
+from account.views import (
+    registration_view,
+    logout_view,
+    login_view,
+    account_view,
+    must_authenticate_view,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include ('api.urls')),
+    # path('', include ('api.urls')),
+    path('account/', account_view, name="account"),
+    path('login/', login_view, name="login"),
+    path('logout/', logout_view, name="logout"),
+    path('must_authenticate/', must_authenticate_view, name="must_authenticate"),
+    path('register/', registration_view, name="register"),
+    
+    #Django registration paths
+    path('accounts/', include('django_registration.backends.activation.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('django_registration.backends.one_step.urls')),
+    path('api/account/', include('account.api.urls', 'account_api')),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

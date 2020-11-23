@@ -39,10 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api',
+    'account',
     'rest_framework',
     'cloudinary',
     'rest_framework.authtoken',
+
 ]
 
 MIDDLEWARE = [
@@ -139,6 +140,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+#Cloudinary initialization
 cloudinary.config(
     cloud_name= os.environ.get('CLOUD_NAME'),
     api_key=os.environ.get('API_KEY'),
@@ -146,10 +148,10 @@ cloudinary.config(
 )
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication', 
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }
 
-JWT_SECRET_KEY ='rome' 
-AUTH_USER_MODEL ='api.User'
+ 
+AUTH_USER_MODEL = 'account.Account'
